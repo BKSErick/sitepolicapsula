@@ -1,0 +1,1120 @@
+.site-header {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  border-bottom: 1px solid rgb(255 255 255 / 12%);
+  background: rgb(18 21 25 / 96%);
+  color: var(--color-white);
+  transition:
+    min-height 240ms var(--ease),
+    background 240ms ease,
+    box-shadow 240ms ease;
+  backdrop-filter: saturate(145%) blur(16px);
+}
+
+.site-header--scrolled {
+  background: rgb(18 21 25 / 88%);
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 18%);
+}
+
+.site-header__inner {
+  display: grid;
+  grid-template-columns: minmax(15rem, 1fr) auto;
+  align-items: stretch;
+  width: min(100%, 100rem);
+  min-height: 5.25rem;
+  margin-inline: auto;
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-inline: var(--space-4);
+  border-right: 1px solid rgb(255 255 255 / 12%);
+}
+
+.site-header__brand > span {
+  color: #87a1b1;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.11em;
+}
+
+.brand-mark {
+  width: 8.75rem;
+  height: auto;
+}
+
+.main-navigation {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+}
+
+.main-navigation > a {
+  display: flex;
+  align-items: center;
+  padding-inline: clamp(0.65rem, 1.2vw, 1.35rem);
+  border-left: 1px solid transparent;
+  border-left: 1px solid rgb(255 255 255 / 7%);
+  color: #c7d5dd;
+  font-size: 0.77rem;
+  font-weight: 500;
+  transition:
+    color 180ms ease,
+    background 180ms ease;
+}
+
+.main-navigation > a:hover {
+  background: rgb(255 255 255 / 7%);
+  color: var(--color-white);
+}
+
+.main-navigation .header-cta {
+  padding-inline: clamp(1rem, 2.4vw, 2.5rem);
+  border-color: transparent;
+  background: var(--color-signal);
+  color: var(--color-ink);
+}
+
+.main-navigation .header-cta:hover {
+  background: var(--color-white);
+  color: var(--color-ink);
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.breadcrumbs {
+  display: flex;
+  gap: var(--space-2);
+  padding-block: 0.85rem;
+  color: #8ba1ae;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+/* A barra de breadcrumb fica sobre o fundo claro da página, então clarear no
+   hover apagava o link. O afordance correto aqui é escurecer. */
+.breadcrumbs a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.breadcrumbs a:hover,
+.breadcrumbs a:focus-visible {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.page-hero {
+  position: relative;
+  min-height: min(48rem, calc(100vh - 7.8rem));
+  overflow: hidden;
+  background: var(--gradient-hero);
+  color: var(--color-white);
+  isolation: isolate;
+}
+
+/* Grid técnico + hachura diagonal. Duas texturas geométricas na mesma camada. */
+.page-hero::before {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 4%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 4%) 1px, transparent 1px),
+    repeating-linear-gradient(
+      45deg,
+      rgb(234 119 7 / 5%) 0 1px,
+      transparent 1px 9px
+    );
+  background-size: var(--texture-grid) var(--texture-grid), var(--texture-grid) var(--texture-grid), auto;
+  mask-image: linear-gradient(105deg, #000 12%, rgb(0 0 0 / 45%) 62%, transparent 92%);
+  content: '';
+  pointer-events: none;
+}
+
+/* Grão fino + vinheta. Tira o aspecto "degradê chapado" sem pesar em asset. */
+.page-hero__shade {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    radial-gradient(130% 100% at 50% 0%, transparent 42%, rgb(12 14 17 / 62%) 100%),
+    linear-gradient(0deg, rgb(29 34 40 / 30%) 0%, transparent 46%);
+}
+
+.page-hero__shade::after {
+  position: absolute;
+  inset: 0;
+  background-image: var(--texture-grain);
+  background-size: 180px 180px;
+  opacity: 0.5;
+  content: '';
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.page-hero__inner {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(20rem, 0.7fr);
+  gap: clamp(3rem, 7vw, 8rem);
+  align-items: end;
+  min-height: inherit;
+  padding-block: clamp(5rem, 10vh, 8.5rem) 6.5rem;
+}
+
+.page-hero__copy {
+  max-width: 61rem;
+}
+
+.page-hero__copy h1 {
+  max-width: 15ch;
+  margin-block: var(--space-4) var(--space-5);
+  color: var(--color-white);
+  font-size: clamp(3rem, 5vw, 5.7rem);
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.page-hero__copy > p {
+  max-width: 43rem;
+  margin-bottom: var(--space-5);
+  color: #c0d0d9;
+  font-size: var(--step-1);
+}
+
+.page-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.page-hero__actions .arrow-link--secondary {
+  border-color: rgb(255 255 255 / 34%);
+  color: var(--color-white);
+}
+
+.page-hero__actions .arrow-link--secondary:hover {
+  background: rgb(255 255 255 / 9%);
+}
+
+.page-hero__console {
+  position: relative;
+  display: flex;
+  min-height: 25rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-5);
+  border: 1px solid rgb(255 255 255 / 24%);
+  background: rgb(29 34 40 / 84%);
+  color: var(--color-white);
+  box-shadow: 1.25rem 1.25rem 0 rgb(234 119 7 / 16%);
+  backdrop-filter: blur(12px);
+}
+
+.page-hero__console::before {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 5rem;
+  height: 3px;
+  background: var(--color-signal);
+  content: '';
+}
+
+.page-hero__console-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.page-hero__console-head i {
+  height: 1px;
+  flex: 1;
+  background: rgb(255 255 255 / 30%);
+}
+
+.page-hero__console .technical-code {
+  color: var(--color-brand-100);
+}
+
+.page-hero__console > strong {
+  max-width: 9ch;
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.page-hero__proof {
+  border-top: 1px solid rgb(255 255 255 / 28%);
+}
+
+.page-hero__proof > div {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: var(--space-2);
+  padding-block: 0.7rem;
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
+}
+
+.page-hero__proof span,
+.page-hero__proof p {
+  margin: 0;
+  color: #bdd1dc;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.page-hero__proof b {
+  display: block;
+  margin-bottom: 0.1rem;
+  color: var(--color-white);
+  font-weight: 500;
+}
+
+.page-hero__ticker {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  padding: 0.8rem var(--gutter);
+  border-top: 1px solid rgb(255 255 255 / 14%);
+  background: rgb(18 21 25 / 72%);
+  color: #7692a3;
+  font-family: var(--font-mono);
+  font-size: 0.61rem;
+  letter-spacing: 0.13em;
+  white-space: nowrap;
+}
+
+.technical-rail {
+  display: none;
+}
+
+.arrow-link,
+.button {
+  display: inline-flex;
+  min-height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--color-brand-800);
+  background: var(--color-brand-800);
+  color: var(--color-white);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    gap 180ms var(--ease),
+    background 180ms ease;
+}
+
+.arrow-link:hover {
+  gap: 2rem;
+  background: var(--color-brand-900);
+}
+
+.arrow-link--secondary,
+.button--secondary {
+  background: transparent;
+  color: var(--color-brand-800);
+}
+
+.arrow-link--text {
+  min-height: auto;
+  padding: 0.4rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--color-brand-800);
+  background: transparent;
+  color: var(--color-brand-800);
+}
+
+.arrow-link--text:hover {
+  background: transparent;
+}
+
+.section-heading {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  gap: var(--space-4);
+  max-width: 67rem;
+  margin-bottom: var(--space-7);
+}
+
+.section-heading__index {
+  padding-top: 0.2rem;
+  color: var(--color-brand-400);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+}
+
+.section-heading h2 {
+  max-width: 18ch;
+  margin-block: var(--space-3);
+}
+
+.section-heading p {
+  max-width: 48rem;
+  font-size: var(--step-1);
+}
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  border-top: var(--line);
+  border-left: var(--line);
+}
+
+.solution-card {
+  display: flex;
+  min-height: 19rem;
+  grid-column: span 3;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--space-4);
+  border-right: var(--line);
+  border-bottom: var(--line);
+  background: rgb(255 255 255 / 54%);
+  transition:
+    transform 240ms var(--ease),
+    background 240ms ease;
+}
+
+/* Primeira linha: 4 cards. Segunda linha: 3 cards mais largos fecham as 12 colunas. */
+.solution-card:nth-child(n + 5) {
+  grid-column: span 4;
+}
+
+.solution-card:hover {
+  z-index: 1;
+  transform: translateY(-0.35rem);
+  background: var(--color-white);
+  box-shadow: 0 1.5rem 3rem rgb(31 37 44 / 10%);
+}
+
+.solution-card__top {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  color: var(--color-brand-800);
+  font-family: var(--font-mono);
+}
+
+.solution-card__icon {
+  width: auto;
+  height: 3.25rem;
+  margin-block: var(--space-4) var(--space-3);
+  object-fit: contain;
+  object-position: left bottom;
+  opacity: 0.9;
+  transition: opacity 240ms ease;
+}
+
+.solution-card:hover .solution-card__icon {
+  opacity: 1;
+}
+
+.solution-card h3 {
+  margin-block: 0.75rem;
+}
+
+.solution-card p {
+  margin-bottom: 0;
+  font-size: 0.93rem;
+}
+
+/* Faixa de marcas autorizadas.
+   Os logos vêm de fontes mistas (PNG transparente e JPG com fundo branco),
+   então grayscale + fundo branco normaliza o conjunto. */
+.brand-strip {
+  padding-block: var(--space-7);
+  border-bottom: var(--line);
+  background: var(--color-white);
+}
+
+.brand-strip__inner {
+  display: grid;
+  grid-template-columns: minmax(18rem, 24rem) 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.brand-strip__intro h2 {
+  margin: var(--space-2) 0 var(--space-4);
+  font-size: var(--step-2);
+  line-height: 1.15;
+}
+
+.brand-strip__list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  background: var(--color-line);
+  border: var(--line);
+  list-style: none;
+}
+
+.brand-strip__list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-2);
+  background: var(--color-white);
+}
+
+.brand-strip__list img,
+.brand-grid__item img {
+  width: auto;
+  max-width: 100%;
+  height: 2.5rem;
+  object-fit: contain;
+  filter: grayscale(1) contrast(1.15);
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+  transition:
+    filter 200ms ease,
+    opacity 200ms ease;
+}
+
+.brand-strip__list li:hover img,
+.brand-grid__item:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: 1px;
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  background: var(--color-line);
+  border: var(--line);
+  list-style: none;
+}
+
+.brand-grid__item {
+  display: flex;
+  min-height: 12rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  padding: var(--space-4);
+  background: var(--color-white);
+}
+
+.brand-grid__item img {
+  height: 3rem;
+  margin-bottom: auto;
+  object-position: left center;
+}
+
+.brand-grid__item strong {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.brand-grid__item span {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Vitrine de marcas: fundo na cor do fabricante, peça do equipamento em movimento.
+   `--brand-color` e `data-ink` vêm do componente. */
+.brand-showcase {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--space-7) var(--space-5);
+  background: var(--brand-color, var(--color-brand-800));
+  transition: background 620ms var(--ease);
+}
+
+.brand-showcase[data-ink='light'] {
+  --showcase-ink: var(--color-white);
+  --showcase-line: rgb(255 255 255 / 28%);
+  --showcase-soft: rgb(255 255 255 / 72%);
+}
+
+.brand-showcase[data-ink='dark'] {
+  --showcase-ink: var(--color-ink);
+  --showcase-line: rgb(31 37 44 / 22%);
+  --showcase-soft: rgb(31 37 44 / 68%);
+}
+
+.brand-showcase__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: var(--space-6);
+  align-items: center;
+  min-height: 32rem;
+  color: var(--showcase-ink);
+}
+
+.brand-showcase .technical-code {
+  color: var(--showcase-soft);
+}
+
+/* Chip branco em vez de knockout: vários logos são caixa de cor cheia (DeWalt,
+   Puma) e recolorir a marca do fabricante costuma ferir o manual dele.
+   O chip funciona sobre qualquer cor e lê como selo de credencial. */
+.brand-showcase__logo {
+  display: block;
+  width: auto;
+  max-width: 15rem;
+  height: 2.75rem;
+  box-sizing: content-box;
+  padding: var(--space-3) var(--space-4);
+  margin-block: var(--space-4) var(--space-5);
+  background: var(--color-white);
+  object-fit: contain;
+  object-position: center;
+  box-shadow: 0 0.75rem 1.75rem rgb(31 37 44 / 16%);
+}
+
+.brand-showcase__copy h2 {
+  max-width: 16ch;
+  margin: 0 0 var(--space-3);
+  font-size: var(--step-3);
+  line-height: 1.05;
+}
+
+.brand-showcase__copy p {
+  max-width: 42ch;
+  margin-bottom: var(--space-5);
+  color: var(--showcase-soft);
+}
+
+.brand-showcase__specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin: 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--showcase-line);
+}
+
+.brand-showcase__specs dt {
+  color: var(--showcase-soft);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.brand-showcase__specs dd {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+}
+
+/* Os clipes têm fundo cinza de estúdio, não alfa. Em vez de recortar — o que
+   comeria as partes cromadas do equipamento — o vídeo vive num painel claro
+   sobre a cor da marca. Assim a cor real do produto fica preservada, que é o
+   que importa numa página de assistência autorizada. */
+.brand-showcase__stage {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  box-shadow: 0 1.5rem 3.5rem rgb(31 37 44 / 26%);
+}
+
+.brand-showcase__stage video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: #eceff1;
+  object-fit: cover;
+}
+
+.brand-showcase__stage figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-2) var(--space-3);
+  background: var(--brand-color);
+  color: var(--showcase-ink);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+}
+
+/* Filete na cor da marca amarrando o painel ao fundo. */
+.brand-showcase__stage::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 5.5rem;
+  height: 0.35rem;
+  background: var(--brand-color);
+  content: '';
+}
+
+.brand-showcase__controls {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--showcase-line);
+}
+
+.brand-showcase__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.brand-showcase__tab {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--showcase-soft);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.brand-showcase__tab[aria-selected='true'] {
+  color: var(--showcase-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.45rem;
+}
+
+.brand-showcase__arrows {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.brand-showcase__arrows button {
+  display: inline-flex;
+  width: 3.25rem;
+  height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--showcase-line);
+  background: none;
+  color: var(--showcase-ink);
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.brand-showcase__arrows button:hover {
+  background: var(--showcase-ink);
+  color: var(--brand-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-schematic__moving {
+    animation: none;
+  }
+
+  .brand-showcase {
+    transition: none;
+  }
+}
+
+/* Registros em vídeo. O card vertical ocupa uma coluna; o 16/9 ocupa duas,
+   senão os dois formatos brigam pelo mesmo alinhamento. */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+}
+
+.video-card[data-ratio='wide'] {
+  grid-column: span 2;
+}
+
+.video-card__frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-ink);
+}
+
+.video-card[data-ratio='wide'] .video-card__frame {
+  aspect-ratio: 16 / 9;
+}
+
+.video-card[data-ratio='vertical'] .video-card__frame {
+  aspect-ratio: 9 / 16;
+}
+
+.video-card__frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-card__play {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.video-card__play img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 420ms var(--ease),
+    filter 260ms ease;
+}
+
+.video-card__play:hover img {
+  transform: scale(1.03);
+  filter: brightness(0.82);
+}
+
+.video-card__badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 3.75rem;
+  height: 3.75rem;
+  padding-left: 0.2rem;
+  border-radius: 50%;
+  background: var(--color-signal);
+  color: var(--color-ink);
+  place-items: center;
+  transform: translate(-50%, -50%);
+  transition: transform 260ms var(--ease);
+}
+
+.video-card__play:hover .video-card__badge {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.video-card__duration {
+  position: absolute;
+  right: var(--space-2);
+  bottom: var(--space-2);
+  padding: 0.2rem 0.5rem;
+  background: rgb(31 37 44 / 82%);
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.video-card h3 {
+  margin: var(--space-3) 0 0.35rem;
+  font-size: var(--step-1);
+}
+
+.video-card p {
+  margin: 0;
+  color: var(--color-slate);
+  font-size: 0.92rem;
+}
+
+.site-footer {
+  padding-top: 0;
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+.footer-location {
+  position: relative;
+  min-height: 26rem;
+  overflow: hidden;
+  background: var(--color-brand-900);
+}
+
+.footer-location__map {
+  position: absolute;
+  inset: 0 0 11rem;
+  background: #d8e0e4;
+}
+
+.footer-location__map::after {
+  position: absolute;
+  inset: 0;
+  background: rgb(18 21 25 / 18%);
+  content: '';
+  pointer-events: none;
+}
+
+.footer-location__map iframe {
+  display: block;
+  border: 0;
+  filter: saturate(0.65) contrast(1.08);
+}
+
+.footer-location__panel {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 0.85fr auto;
+  gap: var(--space-5);
+  align-items: center;
+  min-height: 15rem;
+  padding-block: var(--space-5);
+  background: var(--color-brand-800);
+  box-shadow:
+    calc((100vw - min(100vw - (var(--gutter) * 2), var(--container))) / -2) 0
+      var(--color-brand-800),
+    calc((100vw - min(100vw - (var(--gutter) * 2), var(--container))) / 2) 0
+      var(--color-brand-800);
+}
+
+.footer-location__panel::before {
+  position: absolute;
+  top: -3.5rem;
+  right: -3rem;
+  width: 13rem;
+  height: 13rem;
+  border: 2rem solid rgb(255 255 255 / 8%);
+  border-radius: 50%;
+  content: '';
+}
+
+.footer-location__panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-location__panel .technical-code {
+  color: var(--color-brand-100);
+}
+
+.footer-location__panel h2 {
+  max-width: 16ch;
+  margin: 0.7rem 0 0;
+  color: var(--color-white);
+  font-size: clamp(1.55rem, 2.4vw, 2.5rem);
+}
+
+.footer-location__panel address,
+.footer-location__hours {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  font-style: normal;
+}
+
+.footer-location__panel svg {
+  color: var(--color-brand-100);
+}
+
+.footer-location__panel span {
+  font-size: 0.88rem;
+}
+
+.footer-location__panel small {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--color-brand-100);
+  font-size: 0.73rem;
+}
+
+.footer-location__route {
+  display: inline-flex;
+  min-height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding-inline: var(--space-4);
+  background: var(--color-signal);
+  color: var(--color-ink);
+  font-weight: 600;
+  transition:
+    transform 180ms var(--ease),
+    background 180ms ease;
+}
+
+.footer-location__route:hover {
+  transform: translateY(-2px);
+  background: var(--color-white);
+  color: var(--color-ink);
+}
+
+.site-footer__top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: var(--space-7);
+  padding-top: var(--space-7);
+}
+
+/* Escopado ao __top: solto em .site-footer, vazava para o h2 do painel de localização. */
+.site-footer__top h2 {
+  margin-bottom: var(--space-4);
+  color: var(--color-brand-400);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-footer p {
+  max-width: 25rem;
+  color: #bfd0db;
+}
+
+.site-footer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer li,
+.site-footer address a,
+.site-footer address span {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #d7e0e5;
+  font-style: normal;
+  font-size: 0.9rem;
+}
+
+.site-footer a:hover {
+  color: var(--color-brand-400);
+}
+
+/* O BrandMark é SVG inline e não reserva espaço abaixo do lettering, então a
+   assinatura encostava no "MANUTENÇÕES" do logo enquanto a linha "DESDE 1994"
+   sobrava longe. Coluna com respiro explícito e igual entre os três. */
+.site-footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.site-footer__brand .brand-mark {
+  margin-bottom: var(--space-1);
+}
+
+.site-footer__brand p {
+  margin: 0;
+}
+
+.site-footer__brand .technical-code {
+  color: var(--color-brand-400);
+}
+
+.site-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--space-7);
+  padding-block: var(--space-4);
+  border-top: 1px solid rgb(255 255 255 / 15%);
+  color: #96aab7;
+  font-size: 0.75rem;
+}
+
+.site-footer__bottom div {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.tracking-consent {
+  position: fixed;
+  z-index: 1000;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-4);
+  width: min(44rem, calc(100% - 2rem));
+  padding: var(--space-4);
+  border: 1px solid rgb(255 255 255 / 18%);
+  background: var(--color-ink);
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 28%);
+  color: var(--color-white);
+}
+
+.tracking-consent strong {
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.tracking-consent p {
+  margin: 0;
+  color: #d7e0e5;
+  font-size: 0.88rem;
+}
+
+.tracking-consent a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--color-brand-100);
+  font-size: 0.8rem;
+}
+
+.tracking-consent__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tracking-consent button {
+  min-height: 2.75rem;
+  padding-inline: var(--space-3);
+  border: 1px solid rgb(255 255 255 / 32%);
+  background: transparent;
+  color: var(--color-white);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+}
+
+.tracking-consent .tracking-consent__accept {
+  border-color: var(--color-signal);
+  background: var(--color-signal);
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+@media (max-width: 42rem) {
+  .tracking-consent {
+    grid-template-columns: 1fr;
+  }
+
+  .tracking-consent__actions {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+}

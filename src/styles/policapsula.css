@@ -1,0 +1,305 @@
+/* Peças novas do site da Policápsula sobre a base editorial herdada. */
+
+/* Elementos com data-reveal="left" começam deslocados para a direita antes de
+   entrar; no celular isso abria rolagem horizontal. clip corta sem criar
+   contêiner de rolagem, então o header fixo continua funcionando. */
+html,
+body {
+  overflow-x: clip;
+}
+
+.home-hero__visual img {
+  filter: saturate(0.95) contrast(1.08);
+}
+
+.home-hero__copy h1 span {
+  display: block;
+}
+
+/* Condensada ocupa menos largura: o título da home pode crescer sem quebrar. */
+.home-hero__copy h1 {
+  font-size: clamp(3.4rem, 2.2rem + 5vw, 6.6rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+}
+
+/* Texto corrido fica na fonte de leitura; a condensada é só para título. */
+.statement-copy p,
+.lead-stack p,
+.lead-copy {
+  font-family: var(--font-body);
+  font-size: var(--step-1);
+  line-height: 1.6;
+}
+
+.home-request__context h2 {
+  font-size: var(--step-3);
+}
+
+.evidence-strip__grid strong {
+  white-space: nowrap;
+}
+
+.evidence-strip__grid .is-long strong {
+  font-size: var(--step-3);
+}
+
+.solution-card__icon {
+  width: 3.25rem;
+  color: var(--color-brand-800);
+}
+
+.form-grid__wide {
+  grid-column: 1 / -1;
+}
+
+/* Caminho da amostra: a sequência que todas as frentes atendem. */
+.sample-path {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0;
+  padding: 0;
+  border-top: var(--line);
+  border-left: var(--line);
+  list-style: none;
+}
+
+.sample-path li {
+  display: flex;
+  min-height: 12rem;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-right: var(--line);
+  border-bottom: var(--line);
+  background: var(--color-white);
+}
+
+.sample-path li:last-child {
+  background: var(--color-graphite);
+  color: var(--color-white);
+}
+
+.sample-path span {
+  color: var(--color-brand-800);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.sample-path li:last-child span {
+  color: var(--color-brand-400);
+}
+
+.sample-path strong {
+  margin-top: auto;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.sample-path p {
+  margin: 0;
+  color: var(--color-slate);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.sample-path li:last-child p {
+  color: rgb(255 255 255 / 78%);
+}
+
+/* Colagens reais são largas (1024x373): painel empilhado, sem recorte. */
+.photo-panel--wide,
+.photo-panel--wide.photo-panel--reverse {
+  grid-template-columns: 1fr;
+}
+
+.photo-panel--wide figure {
+  min-height: 0;
+}
+
+.photo-panel--wide img {
+  height: auto;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.solution-media {
+  margin: 0;
+  border: var(--line);
+  background: var(--color-brand-900);
+}
+
+.solution-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 34rem;
+  object-fit: cover;
+}
+
+.solution-media figcaption {
+  padding: 0.7rem 1rem;
+  background: var(--color-ink);
+  color: var(--color-white);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.blueprint-grid--single {
+  grid-template-columns: 1fr;
+}
+
+.product-list {
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  border-top: var(--line);
+  list-style: none;
+}
+
+.product-list li {
+  display: grid;
+  gap: 0.35rem;
+  padding-block: 1rem;
+  border-bottom: var(--line);
+}
+
+.product-list strong {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+}
+
+.product-list p {
+  margin: 0;
+  color: var(--color-slate);
+  line-height: 1.55;
+}
+
+.product-list .arrow-link {
+  justify-self: start;
+}
+
+/* O bloco de serviços e produtos da solução é escuro. */
+.section--blueprint .product-list,
+.section--blueprint .product-list li {
+  border-color: rgb(255 255 255 / 18%);
+}
+
+.section--blueprint .product-list strong {
+  color: var(--color-white);
+}
+
+.section--blueprint .product-list p {
+  color: rgb(255 255 255 / 74%);
+}
+
+.section--blueprint .product-list .arrow-link {
+  color: var(--color-brand-400);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: var(--space-6);
+  border-top: var(--line);
+  border-left: var(--line);
+}
+
+.product-grid article {
+  display: flex;
+  min-height: 19rem;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-right: var(--line);
+  border-bottom: var(--line);
+  background: var(--color-white);
+}
+
+.product-grid header {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.product-grid header span {
+  color: var(--color-brand-800);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.product-grid header a {
+  color: var(--color-muted);
+  text-align: right;
+}
+
+.product-grid h2 {
+  margin: 0;
+  font-size: var(--step-2);
+  line-height: 1.05;
+}
+
+.product-grid p {
+  margin: 0 0 auto;
+  color: var(--color-slate);
+  line-height: 1.55;
+}
+
+.brand-grid__item {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--color-white);
+  text-align: center;
+}
+
+@media (min-width: 62.01rem) {
+  /* Cinco frentes: três em cima, duas embaixo. */
+  .solution-card,
+  .solution-card:nth-child(n) {
+    grid-column: span 4;
+  }
+
+  .solution-card:nth-child(n + 4) {
+    grid-column: span 6;
+  }
+
+  .brand-strip__list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 62rem) {
+  .sample-path {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 44rem) {
+  .home-hero__copy h1 {
+    font-size: clamp(2.8rem, 12vw, 3.6rem);
+  }
+
+  .sample-path,
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sample-path li {
+    min-height: 0;
+  }
+
+  .brand-strip__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
