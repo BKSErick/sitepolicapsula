@@ -72,9 +72,9 @@ export function ProductCard({ product }: { product: Product }) {
         ) : null}
         <h3>{product.name}</h3>
         <p>{product.summary}</p>
-        <a className="product-card__add" href={`/contato/?item=${product.slug}#pedido`}>
+        <a className="product-card__add" href={`/contato/?item=${product.slug}#contato-tecnico`}>
           <Plus aria-hidden="true" size={16} />
-          Adicionar ao pedido
+          Solicitar análise
         </a>
       </div>
     </article>
@@ -139,7 +139,7 @@ export function ProductCatalog({ route }: { route: PublicRoute }) {
               <span className="eyebrow">DESTAQUE DO CATÁLOGO · SEGURANÇA NA BANCADA</span>
               <h2>{featured.name}</h2>
               <p>{featured.summary}</p>
-              <ArrowLink href={`/contato/?item=${featured.slug}#pedido`}>Adicionar ao pedido</ArrowLink>
+              <ArrowLink href={`/contato/?item=${featured.slug}#contato-tecnico`}>Solicitar análise</ArrowLink>
             </div>
           </div>
         </section>

@@ -1,24 +1,8 @@
 :root {
-  /* Display condensada: eco do "CÁPSULA" do logo. Corpo e rótulos técnicos em Plex. */
-  --font-display: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  /* Plex dá autoridade técnica sem transformar toda a interface em um display condensado. */
+  --font-display: 'IBM Plex Sans', Arial, sans-serif;
   --font-body: 'IBM Plex Sans', Arial, sans-serif;
   --font-mono: 'IBM Plex Mono', Consolas, monospace;
-}
-
-@font-face {
-  font-family: 'Barlow Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('/fonts/barlow-condensed-600-latin.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Barlow Condensed';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/barlow-condensed-700-latin.woff2') format('woff2');
 }
 
 @font-face {
@@ -54,17 +38,17 @@
    * Texto e botão em fundo claro usam --color-brand-800 (#A94F00, ~5,3:1 com
    * branco). O laranja puro fica para fundo escuro, linhas e destaque.
    */
-  --color-brand-900: #1d2228;
+  --color-brand-900: #111418;
   --color-brand-800: #a94f00;
   --color-brand-600: #ea7707;
   --color-brand-400: #f29a45;
   --color-brand-100: #eaeff3;
-  --color-graphite: #2e353e;
-  --color-ink: #1f252c;
-  --color-slate: #48515b;
-  --color-muted: #69727c;
-  --color-line: #d3d9df;
-  --color-paper: #f4f6f8;
+  --color-graphite: #242a30;
+  --color-ink: #161a1e;
+  --color-slate: #424950;
+  --color-muted: #677078;
+  --color-line: #c8cdd1;
+  --color-paper: #eceeec;
   --color-white: #ffffff;
 
   --color-signal: #ea7707;

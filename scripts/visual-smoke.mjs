@@ -1,6 +1,6 @@
 /**
  * Smoke visual do build: todas as rotas em desktop e celular, sem erro de
- * console, sem imagem quebrada, sem rolagem horizontal, e o Pedido Pronto
+ * console, sem imagem quebrada, sem rolagem horizontal, e o contato técnico
  * abrindo o WhatsApp com o texto certo sem chamar servidor.
  *
  *   npm run build && npm run smoke:visual
@@ -13,7 +13,7 @@ import { chromium } from 'playwright';
 
 import { startDistServer } from './serve-dist.mjs';
 
-const PORT = 4187;
+const PORT = Number(process.env.VISUAL_PORT ?? 4187);
 const BASE = `http://127.0.0.1:${PORT}`;
 const ROUTES = [
   '/',
@@ -49,6 +49,13 @@ try {
   for (const [label, viewport] of VIEWPORTS) {
     const context = await browser.newContext({ viewport });
     const page = await context.newPage();
+    await page.addInitScript(() => {
+      window.__openedUrl = '';
+      window.open = (url) => {
+        window.__openedUrl = String(url ?? '');
+        return null;
+      };
+    });
     const errors = [];
     page.on('console', (message) => message.type() === 'error' && errors.push(message.text()));
     page.on('pageerror', (error) => errors.push(error.message));
@@ -79,27 +86,44 @@ try {
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth
       );
       if (overflow > 1) fail(`${label} ${route}: rolagem horizontal de ${overflow}px`);
+
+      const roundedElements = await page.evaluate(() =>
+        [...document.querySelectorAll('body *')]
+          .filter((element) => {
+            const style = getComputedStyle(element);
+            return [
+              style.borderTopLeftRadius,
+              style.borderTopRightRadius,
+              style.borderBottomRightRadius,
+              style.borderBottomLeftRadius,
+            ].some((value) => Number.parseFloat(value) > 0);
+          })
+          .slice(0, 5)
+          .map((element) => `${element.tagName.toLowerCase()}.${element.className}`)
+      );
+      if (roundedElements.length) {
+        fail(`${label} ${route}: cantos arredondados em ${roundedElements.join(', ')}`);
+      }
       if (errors.length) fail(`${label} ${route}: console ${errors.join(' | ')}`);
     }
 
-    // Pedido Pronto: preenche, envia e confere a URL do WhatsApp.
-    await page.goto(`${BASE}/contato/?item=capsulas-torpedos`, { waitUntil: 'networkidle' });
-    await page.getByRole('radio', { name: 'Nesta semana' }).check({ force: true });
-    await page.fill('[data-field="detail"]', 'Tubo do laboratório químico');
-    await page.fill('[data-field="name"]', 'Teste Smoke');
-    await page.fill('[data-field="company"]', 'Usina Teste');
-    const [popup] = await Promise.all([
-      context.waitForEvent('page'),
-      page.click('.builder__submit'),
-    ]);
-    const opened = popup.url();
-    await popup.close();
-    const text = new URL(opened).searchParams.get('text') ?? '';
-    if (!opened.startsWith('https://wa.me/5531987887665') && !opened.includes('whatsapp')) {
-      fail(`${label}: Pedido Pronto abriu ${opened}`);
+    // Contato técnico: endereço, mapa e mensagem completa pelo WhatsApp.
+    await page.goto(`${BASE}/contato/?item=transporte-pneumatico`, { waitUntil: 'networkidle' });
+    if ((await page.locator('iframe[title="Mapa da Policápsula"]').count()) !== 1) {
+      fail(`${label}: mapa da Policápsula ausente`);
     }
-    if (opened.startsWith('https://wa.me/') && !text.includes('Item: Cápsulas (torpedos) industriais')) {
-      fail(`${label}: texto do pedido incompleto`);
+    if ((await page.locator('.whatsapp-float').count()) !== 1) {
+      fail(`${label}: botão flutuante do WhatsApp ausente`);
+    }
+    await page.fill('[data-contact-field="name"]', 'Teste Smoke');
+    await page.fill('[data-contact-field="company"]', 'Usina Teste');
+    await page.fill('[data-contact-field="email"]', 'teste@usina.com.br');
+    await page.fill('[data-contact-field="phone"]', '(31) 99999-9999');
+    await page.click('.technical-contact__submit');
+    const contactUrl = await page.evaluate(() => window.__openedUrl);
+    const contactText = new URL(contactUrl).searchParams.get('text') ?? '';
+    if (!contactText.includes('Demanda: Transporte pneumático')) {
+      fail(`${label}: contato técnico abriu mensagem incompleta`);
     }
 
     await context.close();
@@ -109,6 +133,13 @@ try {
   if (notFound.status !== 404) fail(`404 devolveu ${notFound.status}`);
   const robots = await (await fetch(`${BASE}/robots.txt`)).text();
   if (!robots.includes('Disallow: /')) fail('robots.txt não bloqueia a prévia');
+  const homeHtml = await (await fetch(`${BASE}/`)).text();
+  if (!homeHtml.includes('href="/favicon-policapsula.svg"')) {
+    fail('HTML não referencia o novo favicon SVG');
+  }
+  if (homeHtml.includes('favicon-32.png') || homeHtml.includes('apple-touch-icon.png')) {
+    fail('HTML ainda referencia os favicons antigos');
+  }
   const sitemap = await (await fetch(`${BASE}/sitemap.xml`)).text();
   const urls = sitemap.match(/<loc>/g)?.length ?? 0;
   if (urls !== ROUTES.length) fail(`sitemap com ${urls} URLs, esperado ${ROUTES.length}`);
@@ -123,4 +154,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Smoke visual ok: ${ROUTES.length} rotas x ${VIEWPORTS.length} telas, Pedido Pronto, 404, robots e sitemap.`);
+console.log(`Smoke visual ok: ${ROUTES.length} rotas x ${VIEWPORTS.length} telas, contato técnico, 404, robots e sitemap.`);

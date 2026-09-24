@@ -14,6 +14,7 @@ const {
   clients,
   company,
   findRoute,
+  home,
   media,
   products,
   requestCatalog,
@@ -22,6 +23,10 @@ const {
 } = content;
 
 describe('Policápsula content contract', () => {
+  it('keeps the home statement in two intentional lines', () => {
+    expect(home.heroLines).toEqual(['Da corrida ao', 'laboratório.']);
+  });
+
   it('keeps the route map in reading order', () => {
     expect(staticRoutes.map((route) => route.path)).toEqual([
       '/',
@@ -56,6 +61,21 @@ describe('Policápsula content contract', () => {
     expect(new Set(requestCatalog.map((option) => option.short)).size).toBe(16);
   });
 
+  it('gives every front a substantial and specific institutional narrative', () => {
+    for (const solution of solutions) {
+      expect(solution.institutional.heading.length).toBeGreaterThanOrEqual(55);
+      expect(solution.institutional.paragraphs).toHaveLength(2);
+      expect(solution.institutional.paragraphs.every((paragraph) => paragraph.length >= 140)).toBe(true);
+      expect(solution.institutional.pillars.map((pillar) => pillar.label)).toEqual([
+        'Entender',
+        'Organizar',
+        'Construir',
+      ]);
+    }
+
+    expect(new Set(solutions.map((solution) => solution.institutional.heading)).size).toBe(6);
+  });
+
   it('shows the eight clients the company itself publishes', () => {
     expect(clients.map((client) => client.name)).toEqual([
       'ArcelorMittal',
@@ -83,6 +103,13 @@ describe('Policápsula content contract', () => {
     expect(company.whatsapp.number).toBe('5531987887665');
   });
 
+  it('keeps the verified address and map in the content source of truth', () => {
+    expect(company.address.label).toBe('Rua Colina, 302, letra A');
+    expect(company.address.region).toBe('Sion · João Monlevade/MG · CEP 35931-440');
+    expect(company.address.mapEmbedUrl).toContain('google.com/maps');
+    expect(company.address.mapEmbedUrl).toContain('output=embed');
+  });
+
   it('references only media that exists in public/', () => {
     const sources = [
       ...Object.values(media).map((asset) => asset.src),
@@ -101,7 +128,7 @@ describe('Policápsula content contract', () => {
   it('keeps unproven claims and leftovers out of the copy', () => {
     const serialized = JSON.stringify(content);
     expect(serialized).not.toContain('—');
-    expect(serialized).not.toMatch(/jotta|monlevade/i);
+    expect(serialized).not.toMatch(/jotta/i);
     expect(serialized).not.toMatch(/\biso\b/i);
     expect(serialized).not.toMatch(/garantia|garantido|líder/i);
   });

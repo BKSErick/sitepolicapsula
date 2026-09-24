@@ -1,41 +1,54 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildRequestMessage, buildWhatsAppRequestUrl, validateWebsiteRequest } from './intake';
+import {
+  buildContactMessage,
+  buildContactWhatsAppUrl,
+  validateTechnicalContact,
+} from './intake';
 
-const valid = {
+const validContact = {
   name: 'Ana Souza',
   company: 'Usina Exemplo',
-  item: 'estacoes-envio-recebimento',
-  detail: 'Estação do laboratório químico',
-  quantity: '',
-  urgency: 'Neste mês',
+  email: 'ana@usina.com.br',
+  phone: '(31) 99999-9999',
+  service: 'transporte-pneumatico',
+  details: 'Precisamos revisar a estação de recebimento.',
   website: '',
 };
 
-describe('Pedido Pronto', () => {
-  it('accepts a complete request', () => {
-    expect(validateWebsiteRequest(valid)).toEqual({ success: true, isBot: false, errors: {} });
+describe('Contato técnico', () => {
+  it('accepts a complete technical contact', () => {
+    expect(validateTechnicalContact(validContact)).toEqual({
+      success: true,
+      isBot: false,
+      errors: {},
+    });
   });
 
-  it('flags missing item, detail and urgency', () => {
-    const result = validateWebsiteRequest({ ...valid, item: 'inexistente', detail: '', urgency: '' });
+  it('rejects invalid email, phone and service', () => {
+    const result = validateTechnicalContact({
+      ...validContact,
+      email: 'ana@',
+      phone: '123',
+      service: 'inexistente',
+    });
+
     expect(result.success).toBe(false);
-    expect(Object.keys(result.errors).sort()).toEqual(['detail', 'item', 'urgency']);
+    expect(Object.keys(result.errors).sort()).toEqual(['email', 'phone', 'service']);
   });
 
-  it('treats the honeypot as a bot', () => {
-    expect(validateWebsiteRequest({ ...valid, website: 'spam.example' }).isBot).toBe(true);
+  it('keeps the honeypot fail closed', () => {
+    expect(validateTechnicalContact({ ...validContact, website: 'spam.example' }).isBot).toBe(true);
   });
 
-  it('writes the item label and marks an empty quantity as a definir', () => {
-    const message = buildRequestMessage(valid);
-    expect(message).toContain('Item: Estações de envio e recebimento');
-    expect(message).toContain('Quantidade: a definir');
-  });
+  it('builds a complete WhatsApp message without a server', () => {
+    const message = buildContactMessage(validContact);
+    const url = new URL(buildContactWhatsAppUrl(validContact));
 
-  it('builds a wa.me link with the encoded message', () => {
-    const url = new URL(buildWhatsAppRequestUrl(valid));
-    expect(url.href.startsWith('https://wa.me/5531987887665?text=')).toBe(true);
-    expect(url.searchParams.get('text')).toContain('Nome: Ana Souza');
+    expect(message).toContain('Demanda: Transporte pneumático');
+    expect(message).toContain('E-mail: ana@usina.com.br');
+    expect(message).toContain('Contexto: Precisamos revisar a estação de recebimento.');
+    expect(url.origin + url.pathname).toBe('https://wa.me/5531987887665');
+    expect(url.searchParams.get('text')).toBe(message);
   });
 });

@@ -85,6 +85,14 @@ export interface Solution {
   heading: string;
   introduction: string;
   context: string;
+  institutional: {
+    heading: string;
+    paragraphs: [string, string];
+    pillars: Array<{
+      label: 'Entender' | 'Organizar' | 'Construir';
+      text: string;
+    }>;
+  };
   icon: SolutionIcon;
   /** Etapas do caminho da amostra em que esta frente atua. */
   pathSteps: PathStepKey[];
@@ -119,6 +127,14 @@ export const company = {
   phone: { label: '(31) 4141-4278', href: 'tel:+553141414278' },
   whatsapp: { label: '(31) 98788-7665', number: '5531987887665' },
   hours: 'Segunda a sexta, das 08h30 às 17h30',
+  address: {
+    label: 'Rua Colina, 302, letra A',
+    region: 'Sion · João Monlevade/MG · CEP 35931-440',
+    mapEmbedUrl:
+      'https://www.google.com/maps?q=Rua%20Colina%2C%20302%2C%20Sion%2C%20Jo%C3%A3o%20Monlevade%20MG%2C%2035931-440&output=embed',
+    mapsUrl:
+      'https://www.google.com/maps/search/?api=1&query=Rua%20Colina%2C%20302%2C%20Sion%2C%20Jo%C3%A3o%20Monlevade%20MG%2C%2035931-440',
+  },
   description: [
     'A Policápsula é uma empresa de engenharia, consultoria, desenvolvimento e manutenção de máquinas e equipamentos. Resolve problemas de processo com produtos e serviços próprios, com atenção à segurança e à qualidade de pessoas, máquinas e equipamentos.',
     'O destaque está nos sistemas de transporte pneumático e na preparação de amostras para análise nos laboratórios da cadeia produtiva do aço: do tubo que leva a amostra à bancada onde ela é preparada.',
@@ -237,6 +253,18 @@ export const solutions: Solution[] = [
       'Consultoria em processos de transporte e preparação de amostras: do estudo de viabilidade à adequação de cápsulas e aos padrões de operação e manutenção.',
     context:
       'A consultoria olha o processo de transporte e de preparação de amostras como um todo. Cobre o estudo de viabilidade e o projeto de sistemas, a adequação de cápsulas para sistemas já em operação, com nacionalização e melhorias, e a elaboração de padrões de operação e manutenção, com auditorias.',
+    institutional: {
+      heading: 'Antes de fabricar uma peça, é preciso compreender o sistema que ela atravessa.',
+      paragraphs: [
+        'A consultoria transforma um conjunto de equipamentos e rotinas em um processo que pode ser lido por inteiro. O ponto de partida é compreender como a amostra percorre a operação, quais elementos participam desse caminho e onde projeto, operação e manutenção precisam conversar.',
+        'A Policápsula conecta estudo de viabilidade, engenharia, adequação de cápsulas, padrões operacionais, indicadores e auditorias. Assim, a intervenção deixa de ser uma resposta isolada e passa a fazer parte de uma decisão técnica coerente com o sistema existente.',
+      ],
+      pillars: [
+        { label: 'Entender', text: 'Ler o caminho completo da amostra, seus equipamentos, rotinas e condicionantes.' },
+        { label: 'Organizar', text: 'Relacionar viabilidade, projeto, padrões, indicadores e manutenção dentro da mesma lógica.' },
+        { label: 'Construir', text: 'Transformar o diagnóstico em critérios para projeto, adequação e evolução do processo.' },
+      ],
+    },
     icon: 'compass',
     pathSteps: ['corrida', 'capsula', 'tubo', 'estacao', 'bancada', 'laboratorio'],
     services: [
@@ -248,7 +276,7 @@ export const solutions: Solution[] = [
       'Auditorias',
     ],
     image: media.capsulasProjeto,
-    cta: 'Montar pedido de consultoria',
+    cta: 'Solicitar análise de consultoria',
     meta: {
       title: 'Consultoria em Transporte e Preparação de Amostras | Policápsula',
       description:
@@ -265,6 +293,18 @@ export const solutions: Solution[] = [
       'Engenharia, fabricação, instalação e manutenção de sistemas de transporte pneumático de amostras, do estudo de viabilidade ao sistema em operação.',
     context:
       'O trabalho começa no estudo de viabilidade e no projeto e segue pela fabricação, pela instalação e pela manutenção eletromecânica em diferentes tipos de sistema de transporte pneumático, inclusive nos que já estão em operação.',
+    institutional: {
+      heading: 'Transporte pneumático não é apenas deslocamento. É continuidade entre produção e laboratório.',
+      paragraphs: [
+        'Um sistema de transporte pneumático conecta pontos que precisam funcionar como uma única operação. Tubulação, acionamento, cápsula, envio e recebimento fazem parte do mesmo percurso e precisam ser considerados em conjunto desde a análise de viabilidade.',
+        'A atuação da Policápsula acompanha esse ciclo: projeto, fabricação, instalação e manutenção eletromecânica, tanto em sistemas novos quanto nos que já estão em operação. O conhecimento acumulado no próprio sistema orienta cada decisão de engenharia.',
+      ],
+      pillars: [
+        { label: 'Entender', text: 'Compreender o percurso, as interfaces e as condições reais da operação.' },
+        { label: 'Organizar', text: 'Definir o sistema como um conjunto integrado, do estudo de viabilidade à manutenção.' },
+        { label: 'Construir', text: 'Projetar, fabricar, instalar e manter soluções coerentes com cada aplicação.' },
+      ],
+    },
     icon: 'wind',
     pathSteps: ['tubo'],
     services: [
@@ -274,7 +314,7 @@ export const solutions: Solution[] = [
       'Manutenção corretiva e preventiva de cápsulas',
     ],
     image: media.capsulasEstacoes,
-    cta: 'Montar pedido de transporte pneumático',
+    cta: 'Solicitar análise de transporte pneumático',
     meta: {
       title: 'Sistemas de Transporte Pneumático de Amostras | Policápsula',
       description:
@@ -291,6 +331,18 @@ export const solutions: Solution[] = [
       'Cápsulas para transporte de amostras fabricadas conforme a dimensão e o peso de cada sistema, sempre olhando para o que pode melhorar no projeto existente.',
     context:
       'A consultoria de adequação cobre engenharia, fabricação, nacionalização com melhorias e manutenção de cápsulas para sistemas de transporte pneumático que já estão em operação, com cápsulas de diferentes matérias-primas.',
+    institutional: {
+      heading: 'A cápsula é a interface crítica entre a amostra transportada e o sistema que a conduz.',
+      paragraphs: [
+        'Uma cápsula industrial não é um componente genérico. Dimensão, peso, matéria-prima e comportamento dentro do sistema precisam responder às condições da instalação em que ela será utilizada e ao percurso que deverá cumprir.',
+        'Por isso, nacionalizar não significa apenas reproduzir uma peça existente. A Policápsula parte da engenharia e da leitura do sistema para adequar, revisar, fabricar e manter a cápsula com critérios definidos para aquela operação.',
+      ],
+      pillars: [
+        { label: 'Entender', text: 'Ler dimensão, peso, matéria-prima e relação da cápsula com o sistema existente.' },
+        { label: 'Organizar', text: 'Converter as condições da aplicação em critérios claros de engenharia e fabricação.' },
+        { label: 'Construir', text: 'Adequar, nacionalizar, fabricar e manter a peça para a realidade da operação.' },
+      ],
+    },
     icon: 'pill',
     pathSteps: ['capsula'],
     services: [
@@ -300,7 +352,7 @@ export const solutions: Solution[] = [
       'Manutenção corretiva e preventiva',
     ],
     image: media.capsulasProjeto,
-    cta: 'Montar pedido de cápsulas',
+    cta: 'Solicitar análise de cápsulas',
     meta: {
       title: 'Cápsulas Industriais para Transporte de Amostras | Policápsula',
       description:
@@ -317,6 +369,18 @@ export const solutions: Solution[] = [
       'Estações de envio e recebimento com intertravamento mecânico e amortecedores reguláveis que absorvem o impacto da cápsula na chegada.',
     context:
       'Engenharia, fabricação e manutenção das estações usadas nos sistemas de transporte pneumático de cápsulas, e dos amortecedores reguláveis com batentes que recebem a cápsula na chegada à estação de envio e recebimento.',
+    institutional: {
+      heading: 'A chegada da cápsula precisa ser tão bem resolvida quanto o percurso que a trouxe até ali.',
+      paragraphs: [
+        'A estação é o ponto em que movimento, acesso e recebimento se encontram. O intertravamento mecânico organiza a interação com o sistema, enquanto amortecedores reguláveis e batentes participam do controle do impacto na chegada da cápsula.',
+        'A Policápsula trata estação e amortecimento como partes da mesma engenharia. Projeto, fabricação, instalação e manutenção são orientados pela forma como a cápsula chega, é recebida e volta a integrar o ciclo operacional.',
+      ],
+      pillars: [
+        { label: 'Entender', text: 'Analisar as condições de chegada, recebimento e interação com o sistema.' },
+        { label: 'Organizar', text: 'Combinar intertravamento mecânico, amortecimento regulável e acesso operacional.' },
+        { label: 'Construir', text: 'Projetar, fabricar, instalar e manter estações e amortecedores como um conjunto.' },
+      ],
+    },
     icon: 'arrows',
     pathSteps: ['estacao'],
     services: [
@@ -326,7 +390,7 @@ export const solutions: Solution[] = [
       'Instalação e manutenção',
     ],
     image: media.capsulasEstacoes,
-    cta: 'Montar pedido de estação ou amortecedor',
+    cta: 'Solicitar análise de estação ou amortecedor',
     meta: {
       title: 'Estações de Envio e Recebimento e Amortecedores | Policápsula',
       description:
@@ -343,6 +407,18 @@ export const solutions: Solution[] = [
       'Dispositivos, suportes, lixadeira, placa magnética e acessórios para preparar amostras com mais segurança para o operador.',
     context:
       'Cada item responde a uma tarefa da bancada: lixar a amostra sem expor os dedos, segurar a peça com proteção térmica, fixar o corpo de prova na retífica, separar o ferro metálico da escória, preparar o fio máquina para análise. O desenvolvimento segue as amostras e a necessidade de cada cliente.',
+    institutional: {
+      heading: 'A qualidade da preparação começa no modo como a tarefa é compreendida e o operador é protegido.',
+      paragraphs: [
+        'Na bancada, cada etapa possui uma relação própria entre amostra, equipamento e operador. Lixar, apoiar, fixar, separar ou preparar materiais exige dispositivos coerentes com a tarefa real e com a forma como o trabalho acontece.',
+        'A Policápsula parte da amostra e da necessidade apresentada pelo cliente para desenvolver dispositivos, suportes, moldes e acessórios. O objetivo é organizar a execução da tarefa e incorporar segurança ao próprio modo de operar.',
+      ],
+      pillars: [
+        { label: 'Entender', text: 'Observar a tarefa, a amostra, o equipamento utilizado e a exposição do operador.' },
+        { label: 'Organizar', text: 'Traduzir cada etapa da bancada em requisitos de apoio, fixação, separação ou preparo.' },
+        { label: 'Construir', text: 'Desenvolver dispositivos e acessórios adequados à necessidade apresentada.' },
+      ],
+    },
     icon: 'flask',
     pathSteps: ['bancada'],
     services: [
@@ -352,7 +428,7 @@ export const solutions: Solution[] = [
       'Manutenção de moldes e troca de abrasivos',
     ],
     image: media.dispositivo,
-    cta: 'Montar pedido para a bancada',
+    cta: 'Solicitar análise para a bancada',
     meta: {
       title: 'Dispositivos para Preparação de Amostras | Policápsula',
       description:
@@ -369,6 +445,18 @@ export const solutions: Solution[] = [
       'Inspeção, manutenção preventiva e corretiva, adequação à NR10 e à NR12 e gestão da manutenção baseada em confiabilidade.',
     context:
       'Alterações eletromecânicas para otimizar máquinas e equipamentos, como inversor de frequência, dispositivos de segurança e mudanças de acionamento. Na gestão, análise e definição de indicadores, padrões operacionais e de manutenção, auditorias e estoque de sobressalentes just in time baseado em MCC, a Manutenção Centrada em Confiabilidade.',
+    institutional: {
+      heading: 'A manutenção ganha valor quando deixa de apenas reagir e passa a orientar decisões.',
+      paragraphs: [
+        'Inspeção, manutenção preventiva e corretiva e adequação à NR10 e à NR12 tratam a condição técnica do equipamento. Indicadores, padrões, auditorias e análise de sobressalentes tratam a capacidade da operação de decidir com método.',
+        'A Policápsula reúne essas duas dimensões. As alterações eletromecânicas respondem à máquina existente, enquanto a gestão baseada em confiabilidade organiza prioridades, rotinas e recursos para sustentar a manutenção no longo prazo.',
+      ],
+      pillars: [
+        { label: 'Entender', text: 'Ler a condição da máquina, o histórico de manutenção e as exigências aplicáveis.' },
+        { label: 'Organizar', text: 'Estruturar prioridades, indicadores, padrões, auditorias e sobressalentes.' },
+        { label: 'Construir', text: 'Executar adequações e melhorias eletromecânicas coerentes com a gestão definida.' },
+      ],
+    },
     icon: 'wrench',
     pathSteps: ['corrida', 'tubo', 'estacao', 'bancada'],
     services: [
@@ -380,7 +468,7 @@ export const solutions: Solution[] = [
       'Auditorias',
     ],
     image: media.corrida,
-    cta: 'Montar pedido de engenharia de manutenção',
+    cta: 'Solicitar análise de engenharia de manutenção',
     meta: {
       title: 'Engenharia de Manutenção e Adequação NR10 e NR12 | Policápsula',
       description:
@@ -497,7 +585,7 @@ export function productsFor(solutionSlug: string): Product[] {
 }
 
 export const home = {
-  heroLines: ['Da corrida', 'ao laboratório.'],
+  heroLines: ['Da corrida ao', 'laboratório.'],
   heroFacts: ['Cadeia do aço', '06 frentes técnicas', '10 produtos próprios', 'NR10 · NR12'],
 } as const;
 
@@ -508,7 +596,7 @@ export interface RequestOption {
   group: 'Produtos' | 'Serviços';
 }
 
-/** Itens do Pedido Pronto: os dez produtos e as seis frentes como serviço. */
+/** Opções do contato técnico: os dez produtos e as seis frentes de serviço. */
 export const requestCatalog: RequestOption[] = [
   ...products.map((product) => ({
     value: product.slug,
@@ -523,13 +611,6 @@ export const requestCatalog: RequestOption[] = [
     group: 'Serviços' as const,
   })),
 ];
-
-export const urgencyOptions = [
-  'Parada ou risco à operação',
-  'Nesta semana',
-  'Neste mês',
-  'Planejamento ou orçamento',
-] as const;
 
 export function findRequestOption(value?: string | null): RequestOption | undefined {
   return requestCatalog.find((option) => option.value === value);
@@ -603,14 +684,14 @@ const coreRoutes: PublicRoute[] = [
     path: '/contato/',
     kind: 'contact',
     label: 'Contato',
-    eyebrow: 'PEDIDO PRONTO · WHATSAPP',
-    heading: 'Informe o item e a medida. A conversa começa no ponto.',
+    eyebrow: 'CONTATO TÉCNICO · WHATSAPP',
+    heading: 'Envie sua demanda para análise da nossa engenharia.',
     introduction:
-      'Escolha o item, informe o sistema, o modelo ou a dimensão, a quantidade e a urgência. O pedido chega pronto no WhatsApp da Policápsula.',
+      'Informe o sistema, a peça, a medida ou a situação da operação. A conversa começa com o contexto certo e segue direto para a equipe técnica.',
     meta: {
-      title: 'Contato e Pedido pelo WhatsApp | Policápsula',
+      title: 'Contato Técnico e WhatsApp | Policápsula',
       description:
-        'Monte o pedido com item, sistema ou dimensão, quantidade e urgência e envie direto para o WhatsApp da equipe técnica da Policápsula.',
+        'Envie sua demanda de transporte pneumático, cápsulas e preparação de amostras para análise da equipe técnica da Policápsula.',
     },
   },
   {
@@ -620,11 +701,11 @@ const coreRoutes: PublicRoute[] = [
     eyebrow: 'PRIVACIDADE E DADOS',
     heading: 'Como os dados informados no site são tratados.',
     introduction:
-      'Esta página apresenta os princípios de tratamento das informações fornecidas no pedido pelo site e nos canais de contato.',
+      'Esta página apresenta os princípios de tratamento das informações fornecidas no contato técnico e nos demais canais de atendimento.',
     meta: {
       title: 'Política de Privacidade | Policápsula',
       description:
-        'Consulte como a Policápsula trata os dados informados no pedido pelo site, no WhatsApp e nos demais canais digitais de contato.',
+        'Consulte como a Policápsula trata os dados informados no contato técnico, no WhatsApp e nos demais canais digitais.',
     },
   },
 ];

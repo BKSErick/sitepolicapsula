@@ -18,7 +18,7 @@ npm run lint
 npm run typecheck
 npm test
 npm run build
-npm run smoke:visual   # depois do build; sobe o servidor local na porta 4187
+npm run smoke:visual   # depois do build; use VISUAL_PORT para trocar a porta 4187
 ```
 
 O build pré-renderiza as rotas públicas em `dist/client` e falha se alguma
@@ -30,11 +30,18 @@ Todo texto, foto, produto e contato mora em `src/data/site-content.ts`. Os
 componentes só leem desse módulo: é a costura para a etapa 2 (painel de edição),
 em que a fonte do conteúdo passa a ser o painel e nenhum componente muda.
 
-## Pedido Pronto
+## Contato técnico
 
-O formulário roda só no navegador: monta a mensagem com item, sistema ou
-dimensão, quantidade, urgência, nome e empresa e abre o WhatsApp da Policápsula.
-Não há servidor nem variável de ambiente.
+O mesmo contato técnico aparece na home e na rota `/contato/`. Ele roda só no
+navegador, não envia dados a um servidor e abre o WhatsApp oficial com nome,
+empresa, e-mail, telefone, serviço e contexto opcional. O bloco também reúne os
+canais diretos e o mapa do endereço.
+
+## Sistema visual
+
+O refinamento industrial usa IBM Plex Sans e IBM Plex Mono locais, quinas secas,
+chanfros, linhas de processo e o laranja térmico da marca. O smoke visual verifica
+que nenhuma rota renderiza cantos arredondados e cobre desktop e mobile.
 
 ## Indexação
 

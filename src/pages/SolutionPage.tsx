@@ -13,6 +13,30 @@ export function SolutionPage({ route, solution }: { route: PublicRoute; solution
     <>
       <Breadcrumbs current={solution.shortName} parent={{ label: 'Soluções', href: '/solucoes/' }} />
       <SolutionHero route={route} solution={solution} />
+      <section className="solution-institutional">
+        <div className="container">
+          <div className="solution-institutional__lead">
+            <header data-reveal="up">
+              <span className="technical-code">VISÃO DA FRENTE / {solution.number}</span>
+              <h2>{solution.institutional.heading}</h2>
+            </header>
+            <div className="solution-institutional__copy" data-reveal="up">
+              {solution.institutional.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+          <div className="solution-institutional__pillars">
+            {solution.institutional.pillars.map((pillar, index) => (
+              <article className="solution-institutional__pillar" key={pillar.label} data-reveal="up">
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{pillar.label}</h3>
+                <p>{pillar.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
       <section className="solution-body">
         <div className="container solution-body__grid">
           <div data-reveal="up">
@@ -46,8 +70,8 @@ export function SolutionPage({ route, solution }: { route: PublicRoute; solution
         </section>
       ) : null}
       <OrderBar
-        text={`Leve o pedido de ${solution.shortName.toLowerCase()} já com item e medida.`}
-        href={`/contato/?item=${solution.slug}#pedido`}
+        text={`Envie a demanda de ${solution.shortName.toLowerCase()} com o contexto da aplicação.`}
+        href={`/contato/?item=${solution.slug}#contato-tecnico`}
         cta={solution.cta}
       />
     </>

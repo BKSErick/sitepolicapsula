@@ -1,14 +1,12 @@
-import { Clock3, Mail, MessageCircle, Phone } from 'lucide-react';
-
 import {
   company,
   home,
   media,
   solutions,
-  whatsappUrl,
   type PublicRoute,
   type Solution,
 } from '../data/site-content';
+import { ArrowUpRight } from 'lucide-react';
 import { ArrowLink } from './ArrowLink';
 import { SamplePath } from './SamplePath';
 
@@ -28,7 +26,7 @@ export function HomeHero({ route }: { route: PublicRoute }) {
           </h1>
           <p>{route.introduction}</p>
           <div className="hero-actions">
-            <ArrowLink href="/contato/#pedido">Montar pedido</ArrowLink>
+            <ArrowLink href="#contato-tecnico">Solicitar análise</ArrowLink>
             <ArrowLink href="/solucoes/" variant="ghost">
               Ver as seis frentes
             </ArrowLink>
@@ -84,14 +82,25 @@ export function SolutionsHero({ route }: { route: PublicRoute }) {
   return (
     <section className="hero-paper">
       <div className="container" data-reveal-text="">
-        <span className="eyebrow">{route.eyebrow}</span>
-        <h1>{route.heading}</h1>
-        <p className="hero-paper__lead">{route.introduction}</p>
+        <div className="hero-paper__top">
+          <div>
+            <span className="eyebrow">{route.eyebrow}</span>
+            <h1>{route.heading}</h1>
+          </div>
+          <div className="hero-paper__intro">
+            <span className="technical-code">DIRETÓRIO TÉCNICO / 06 FRENTES</span>
+            <p className="hero-paper__lead">{route.introduction}</p>
+          </div>
+        </div>
         <nav className="front-pills" aria-label="Frentes técnicas">
           {solutions.map((solution) => (
             <a key={solution.slug} href={`/solucoes/${solution.slug}/`}>
               <span>{solution.number}</span>
-              {solution.shortName}
+              <div>
+                <strong>{solution.shortName}</strong>
+                <small>{solution.introduction}</small>
+              </div>
+              <ArrowUpRight aria-hidden="true" size={20} />
             </a>
           ))}
         </nav>
@@ -112,7 +121,7 @@ export function SolutionHero({ route, solution }: { route: PublicRoute; solution
             <h1>{route.heading}</h1>
             <p>{route.introduction}</p>
             <div className="hero-actions">
-              <ArrowLink href={`/contato/?item=${solution.slug}#pedido`}>Montar pedido</ArrowLink>
+              <ArrowLink href={`/contato/?item=${solution.slug}#contato-tecnico`}>Solicitar análise</ArrowLink>
               <ArrowLink href="/produtos/" variant="secondary">
                 Ver produtos
               </ArrowLink>
@@ -132,7 +141,7 @@ export function SolutionHero({ route, solution }: { route: PublicRoute; solution
   );
 }
 
-/** Contato: grafite compacto com os canais diretos em pílulas. */
+/** Contato: abertura curta, com a sequência de atendimento como prova de processo. */
 export function ContactHero({ route }: { route: PublicRoute }) {
   return (
     <section className="hero-contact">
@@ -142,32 +151,11 @@ export function ContactHero({ route }: { route: PublicRoute }) {
           <h1>{route.heading}</h1>
           <p>{route.introduction}</p>
         </div>
-        <ul className="channel-pills">
-          <li>
-            <a href={whatsappUrl()}>
-              <MessageCircle aria-hidden="true" size={18} />
-              WhatsApp {company.whatsapp.label}
-            </a>
-          </li>
-          <li>
-            <a href={company.phone.href}>
-              <Phone aria-hidden="true" size={18} />
-              {company.phone.label}
-            </a>
-          </li>
-          <li>
-            <a href={`mailto:${company.email}`}>
-              <Mail aria-hidden="true" size={18} />
-              {company.email}
-            </a>
-          </li>
-          <li>
-            <span>
-              <Clock3 aria-hidden="true" size={18} />
-              {company.hours}
-            </span>
-          </li>
-        </ul>
+        <ol className="contact-sequence" aria-label="Fluxo do atendimento">
+          <li><span>01</span> Contexto</li>
+          <li><span>02</span> Análise</li>
+          <li><span>03</span> Retorno técnico</li>
+        </ol>
       </div>
     </section>
   );

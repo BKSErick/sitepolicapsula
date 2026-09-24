@@ -82,7 +82,7 @@ function PrivacyContent() {
         </p>
         <h2>O que o site coleta</h2>
         <p>
-          O Pedido Pronto não grava os dados em nenhum servidor do site. As informações
+          O contato técnico não grava os dados em nenhum servidor do site. As informações
           digitadas montam uma mensagem que abre no WhatsApp da Policápsula, e o envio só
           acontece quando o visitante confirma lá.
         </p>

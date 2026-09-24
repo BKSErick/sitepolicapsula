@@ -1,6 +1,6 @@
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { ContactHero } from '../components/Heroes';
-import { RequestBuilder } from '../components/RequestBuilder';
+import { TechnicalContact } from '../components/TechnicalContact';
 import type { PublicRoute } from '../data/site-content';
 
 export function ContactPage({ route }: { route: PublicRoute }) {
@@ -8,9 +8,9 @@ export function ContactPage({ route }: { route: PublicRoute }) {
     <>
       <Breadcrumbs current={route.label} />
       <ContactHero route={route} />
-      <section className="builder-section builder-section--contact">
+      <section className="contact-section">
         <div className="container">
-          <RequestBuilder />
+          <TechnicalContact />
         </div>
       </section>
     </>

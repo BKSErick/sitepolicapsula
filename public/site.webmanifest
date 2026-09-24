@@ -3,10 +3,9 @@
   "short_name": "Policápsula",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f4f6f8",
-  "theme_color": "#2e353e",
+  "background_color": "#0b0d0f",
+  "theme_color": "#0b0d0f",
   "icons": [
-    { "src": "/favicon-policapsula.svg", "sizes": "any", "type": "image/svg+xml" },
-    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+    { "src": "/favicon-policapsula.svg", "sizes": "any", "type": "image/svg+xml" }
   ]
 }

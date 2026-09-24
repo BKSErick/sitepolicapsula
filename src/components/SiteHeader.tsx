@@ -35,7 +35,7 @@ export function SiteHeader() {
             </a>
           ))}
           <a className="header-cta" href="/contato/">
-            Montar pedido
+            Solicitar análise
           </a>
         </nav>
       </div>

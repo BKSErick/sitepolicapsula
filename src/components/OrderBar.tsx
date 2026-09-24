@@ -6,11 +6,11 @@ interface OrderBarProps {
   cta?: string;
 }
 
-/** Fecho das páginas internas: uma pílula laranja que leva ao Pedido Pronto. */
+/** Fecho das páginas internas que leva ao contato técnico. */
 export function OrderBar({
-  text = 'Monte o pedido com item, medida e urgência. Ele chega pronto no WhatsApp da equipe técnica.',
-  href = '/contato/#pedido',
-  cta = 'Montar pedido',
+  text = 'Envie o contexto da demanda para análise direta da equipe técnica.',
+  href = '/contato/#contato-tecnico',
+  cta = 'Solicitar análise',
 }: OrderBarProps) {
   return (
     <section className="order-bar-section">

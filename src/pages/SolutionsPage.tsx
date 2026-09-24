@@ -21,14 +21,14 @@ export function SolutionsPage({ route }: { route: PublicRoute }) {
             <span className="eyebrow">MAPA DAS FRENTES</span>
             <h2>Escolha a frente para ver serviços e produtos.</h2>
             <p>
-              Se o pedido envolver mais de uma frente, como cápsula e estação do mesmo sistema,
-              descreva tudo num pedido só.
+              Se a demanda envolver mais de uma frente, como cápsula e estação do mesmo sistema,
+              descreva todo o contexto no contato técnico.
             </p>
           </div>
           <FrontList />
         </div>
       </section>
-      <OrderBar text="Não sabe em qual frente o pedido entra? Escolha o item mais próximo e descreva a aplicação." />
+      <OrderBar text="Não sabe em qual frente a demanda entra? Escolha o item mais próximo e descreva a aplicação." />
     </>
   );
 }
