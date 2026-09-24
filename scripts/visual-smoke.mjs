@@ -19,6 +19,7 @@ const ROUTES = [
   '/',
   '/empresa/',
   '/solucoes/',
+  '/solucoes/consultoria/',
   '/solucoes/transporte-pneumatico/',
   '/solucoes/capsulas/',
   '/solucoes/estacoes-e-amortecedores/',
@@ -83,13 +84,13 @@ try {
 
     // Pedido Pronto: preenche, envia e confere a URL do WhatsApp.
     await page.goto(`${BASE}/contato/?item=capsulas-torpedos`, { waitUntil: 'networkidle' });
-    await page.selectOption('[data-field="urgency"]', 'Nesta semana');
+    await page.getByRole('radio', { name: 'Nesta semana' }).check({ force: true });
     await page.fill('[data-field="detail"]', 'Tubo do laboratório químico');
     await page.fill('[data-field="name"]', 'Teste Smoke');
     await page.fill('[data-field="company"]', 'Usina Teste');
     const [popup] = await Promise.all([
       context.waitForEvent('page'),
-      page.click('button[type="submit"]'),
+      page.click('.builder__submit'),
     ]);
     const opened = popup.url();
     await popup.close();

@@ -4,7 +4,8 @@ import type { ReactNode } from 'react';
 interface ArrowLinkProps {
   href: string;
   children: ReactNode;
-  variant?: 'primary' | 'secondary' | 'text';
+  /** primary = pílula laranja; secondary = contorno; ghost = contorno claro sobre fundo escuro; text = link sublinhado. */
+  variant?: 'primary' | 'secondary' | 'ghost' | 'text';
   /** Destinos externos abrem em nova aba sem perder a navegação do site. */
   external?: boolean;
 }

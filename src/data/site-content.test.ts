@@ -27,6 +27,7 @@ describe('Policápsula content contract', () => {
       '/',
       '/empresa/',
       '/solucoes/',
+      '/solucoes/consultoria/',
       '/solucoes/transporte-pneumatico/',
       '/solucoes/capsulas/',
       '/solucoes/estacoes-e-amortecedores/',
@@ -43,14 +44,16 @@ describe('Policápsula content contract', () => {
     expect(findRoute('/nao-existe/')).toBeUndefined();
   });
 
-  it('has five fronts and the ten products of the published catalog', () => {
-    expect(solutions).toHaveLength(5);
+  it('has six fronts and the ten products of the published catalog', () => {
+    expect(solutions).toHaveLength(6);
+    expect(solutions[0].slug).toBe('consultoria');
     expect(products).toHaveLength(10);
     expect(new Set(products.map((product) => product.slug)).size).toBe(10);
     for (const product of products) {
       expect(solutions.some((solution) => solution.slug === product.solutionSlug)).toBe(true);
     }
-    expect(requestCatalog).toHaveLength(15);
+    expect(requestCatalog).toHaveLength(16);
+    expect(new Set(requestCatalog.map((option) => option.short)).size).toBe(16);
   });
 
   it('shows the eight clients the company itself publishes', () => {
@@ -84,6 +87,7 @@ describe('Policápsula content contract', () => {
     const sources = [
       ...Object.values(media).map((asset) => asset.src),
       ...solutions.map((solution) => solution.image.src),
+      ...products.flatMap((product) => (product.image ? [product.image.src] : [])),
       ...clients.map((client) => `/brand/clientes/${client.slug}.png`),
       '/brand/policapsula-logo.png',
       '/brand/policapsula-logo-white.png',

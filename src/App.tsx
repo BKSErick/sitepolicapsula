@@ -1,5 +1,6 @@
 import { SiteFooter } from './components/SiteFooter';
 import { SiteHeader } from './components/SiteHeader';
+import { WhatsAppFloat } from './components/WhatsAppFloat';
 import { findRoute, findSolution } from './data/site-content';
 import { usePageMotion } from './hooks/usePageMotion';
 import { ContactPage } from './pages/ContactPage';
@@ -47,6 +48,7 @@ export default function App({ initialPath }: AppProps) {
       <SiteHeader />
       <main id="conteudo">{page}</main>
       <SiteFooter />
+      <WhatsAppFloat />
     </>
   );
 }
